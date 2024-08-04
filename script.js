@@ -13,52 +13,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
-// Replace with your own client ID and secret
-const clientId = '0d380e191bc54ee5a60fae57c561aaee';
-const clientSecret = '0bfcb8b39c1d41c7b6a2d1134df819eb';
-const redirectUri = 'http://jarry.dev';
+// Pre-generated authorization token
+const token = 'BQAubCMhNIm_O5lgBPBjOY7_fxZxofAYiG6kD3SRJfILbOibm_Baw-VOxNDCWh2UygJydxpCYzlwwsFdv73LLdsFqb250h6Tk3_CaDDInuJd5Od9AWSZ5uX7ZsJ59fyurdsCU4hkc08shPhc4LLrIsbhXSFOtZe4MsoIlfs625WZ2lOhkSMu50BcO8O3UoAHvefkbkU-wmLntESYeVsgIYR6X2a-t4CTmLzmY8ffLmFDjTAXNsR-IfzhygbAGbgrAeYhE_9cj4Y';
 
-// Step 1: Redirect to Spotify authorization
-document.addEventListener('DOMContentLoaded', function() {
-    if (!window.location.search.includes('code')) {
-        const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user-top-read`;
-        window.location.href = authUrl;
-    } else {
-        const code = new URLSearchParams(window.location.search).get('code');
-        getAccessToken(code);
-    }
+async function fetchWebApi(endpoint, method, body) {
+  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method,
+    body: JSON.stringify(body)
+  });
+  return await res.json();
+}
+
+async function getTopTracks() {
+  return (await fetchWebApi(
+    'v1/me/top/tracks?time_range=short_term&limit=1', 'GET'
+  )).items;
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
+  try {
+    const topTracks = await getTopTracks();
+    const topTrackInfo = topTracks?.map(
+      ({ name, artists }) =>
+        `${name} by ${artists.map(artist => artist.name).join(', ')}`
+    ).join(', ');
+
+    document.getElementById('artist').innerText = topTrackInfo || 'No top tracks found';
+  } catch (error) {
+    console.error('Error fetching the artist:', error);
+    document.getElementById('artist').innerText = 'Error fetching the artist';
+  }
 });
-
-// Step 2: Get access token using the authorization code
-async function getAccessToken(code) {
-    const params = new URLSearchParams();
-    params.append('grant_type', 'authorization_code');
-    params.append('code', code);
-    params.append('redirect_uri', redirectUri);
-
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: params
-    });
-
-    const data = await response.json();
-    const accessToken = data.access_token;
-    getTopArtist(accessToken);
-}
-
-// Step 3: Fetch top artist
-async function getTopArtist(accessToken) {
-    const response = await fetch('https://api.spotify.com/v1/me/top/artists?limit=1', {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        }
-    });
-
-    const data = await response.json();
-    document.getElementById('artist').innerText = data.items[0].name;
-}
