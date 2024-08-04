@@ -29,83 +29,112 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&family=Roboto:ital,wght@0,700;1,500&display=swap"
         rel="stylesheet">
 
-    <style>
-        body {
-            background-color: #fff;
-            font-family: 'Roboto Mono', monospace;
-            padding-top: 50px;
-        }
-
-        h1 {
-            font-family: 'Roboto', sans-serif;
-            font-weight: bold;
-        }
-
-        h2,
-        h3,
-        h6,
-        h5,
-        h6 {
-            font-family: 'Roboto', sans-serif;
-            font-style: italic;
-        }
-
-        a {
-            text-decoration: none;
-            color: rgb(230, 150, 0);
-        }
-
-        .container {
-            max-width: 768px;
-            margin: auto;
-            background-color: #fff;
-            /* box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21); */
-        }
-
-        code {
-            display: flex;
-            color: black;
-            padding: 0.2em 0.4em;
-            margin: 10px 0;
-            background-color: rgba(175, 184, 193, 0.2);
-            border-radius: 6px;
-        }
-    </style>
+        <style>
+            body {
+                background-color: #fff;
+                font-family: 'Roboto Mono', monospace;
+                padding-top: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+    
+            h1 {
+                font-family: 'Roboto', sans-serif;
+                font-weight: bold;
+            }
+    
+            h2, h3, h4, h5, h6 {
+                font-family: 'Roboto', sans-serif;
+                font-style: italic;
+            }
+    
+            a {
+                text-decoration: none;
+                color: rgb(230, 150, 0);
+            }
+    
+            .container {
+                display: flex;
+                flex-direction: row;
+                max-width: 768px;
+                margin: auto;
+                background-color: #fff;
+                /* box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21); */
+            }
+    
+            .image {
+                flex: 1;
+                padding: 20px;
+            }
+    
+            .content {
+                flex: 2;
+                padding: 20px;
+            }
+    
+            img {
+                border-radius: 50%;
+                width: 100%;
+            }
+    
+            code {
+                display: flex;
+                color: black;
+                padding: 0.2em 0.4em;
+                margin: 10px 0;
+                background-color: rgba(175, 184, 193, 0.2);
+                border-radius: 6px;
+            }
+    
+            @media (max-width: 768px) {
+                .container {
+                    flex-direction: column;
+                }
+    
+                .image {
+                    order: 1;
+                }
+    
+                .content {
+                    order: 2;
+                }
+            }
+        </style>
 
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-
-            <div class="col-4">
-                <img style="border-radius: 50%;width: 100%;"
-                    src="https://raw.githubusercontent.com/jarry90/jarrydev/main/jared-cavalli.jpeg">
-            </div>
-
-            <div class="col-8">
-                <h1>Hi there 👋 I'm Jared</h1>
-                <code>🦖 DAD, HUSBAND & DREAMER 🎃</code>
-                <p>GradCertIT 2023
-                <br>BEng 2014</p>
-                <p>🎵 Listening to: <span id="artist">Loading...</span></p>
-                <p>♟️ Lets play <a href="https://www.chess.com/member/jarry90">chess</a>. Currently raited: <span id="rating">Loading...</span></p>
-                <p>Find me: <a href="https://github.com/jarry90">GitHub</a> ⢷ <a href="mailto:hi@jarry.dev">Email</a>
-                ⢷ <a
-                    href="https://www.linkedin.com/in/jaredcavalli/">Linkedin</a></p>
-                <p>Working on: <a href="https://goodtraveldays.com/">Good Travel Days</a> ⢷ <a href="https://goodsnowdays.com/">Good Snow Days</a></p>
-
-            </div>
+        <div class="image">
+            <img style="border-radius: 50%;width: 100%;"
+                src="https://raw.githubusercontent.com/jarry90/jarrydev/main/jared-cavalli.jpeg" alt="Your Image">
         </div>
+        <div class="content">
+            <h1>Hi there 👋 I'm Jared</h1>
+            <code>🦖 DAD, HUSBAND & DREAMER 🎃</code>
+            <p>GradCertIT 2023
+            <br>BEng 2014</p>
+            <p>🎵 Listening to: <span id="artist">Loading...</span></p>
+            <p>♟️ Lets play <a href="https://www.chess.com/member/jarry90">chess</a>. Currently raited: <span id="rating">Loading...</span></p>
+            <p>Find me: <a href="https://github.com/jarry90">GitHub</a> ⢷ <a href="mailto:hi@jarry.dev">Email</a>
+            ⢷ <a
+                href="https://www.linkedin.com/in/jaredcavalli/">Linkedin</a></p>
+            <p>Working on: <a href="https://goodtraveldays.com/">Good Travel Days</a> ⢷ <a href="https://goodsnowdays.com/">Good Snow Days</a></p>
 
-        <!-- <div class="row mt-4"> -->
-            <!-- <p></p> -->
+        </div>
+    </div>
 
-            <!-- <p></p> -->
+    <!-- <div class="row mt-4"> -->
+        <!-- <p></p> -->
 
-        <!-- </div> -->
+        <!-- <p></p> -->
 
-        <script src="script.js"></script>
+    <!-- </div> -->
+
+    <script src="script.js"></script>
         
 
 </body>
