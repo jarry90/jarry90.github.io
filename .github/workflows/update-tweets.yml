@@ -26,14 +26,14 @@ jobs:
         TWITTER_USERNAME: ${{ secrets.TWITTER_USERNAME }}
       run: |
         python3 <<EOF
-        import requests, json
+        import requests, json, os
 
         headers = {
-            "Authorization": f"Bearer '{'${{ env.BEARER_TOKEN }}'}'"
+            "Authorization": f"Bearer {os.environ['BEARER_TOKEN']}"
         }
 
         user_resp = requests.get(
-            f"https://api.twitter.com/2/users/by/username/${{ env.TWITTER_USERNAME }}",
+            f"https://api.twitter.com/2/users/by/username/{os.environ['TWITTER_USERNAME']}",
             headers=headers
         )
         user_id = user_resp.json()["data"]["id"]
