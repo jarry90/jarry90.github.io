@@ -15,9 +15,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description"
-        content="I'm a dad, husband and certified dreamer. I travel, run, bike, snowboard, impulsively buy watches, drive a tesla and live life.">
+        content="The personal webpage of Jared Cavalli. Just for fun 🙃.        ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jarry.dev</title>
+    <title>Jared Cavalli</title>
 
     <!-- Favicon -->
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAZZ5EAAAAAACuIugBEmccAJZHMABhzowAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERERERERERERERERERERERETMzERERERFVRDMzERERFVVUQzMxEREVVVRDMzERERERERERERERAAIlVURDEREAAiVVREMREQAAIlVUQxEREAACJVVREREQAAAiVVEREREAAAJVEREREREAAhERERERERERERERERERERERERH//wAA//8AAPw/AADwDwAA4AcAAOAHAADAAwAAgAEAAEACAACAAQAA4AcAAOAHAADwDwAA/D8AAP//AAD//wAA" rel="icon" type="image/x-icon">
@@ -36,12 +36,18 @@
             body {
                 background-color: #fff;
                 font-family: 'Roboto Mono', monospace;
-                padding-top: 50px;
+                margin: 0;
+                min-height: 100vh;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                min-height: 100vh;
-                margin: 0;
+            }
+
+            .wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
     
             h1 {
@@ -107,36 +113,61 @@
             }
 
             .tweet {
-                padding: 10px;
-                border-bottom: 1px solid #ddd;
-                font-family: sans-serif;
+                padding: 12px;
+                border: 1px solid #eee;
+                margin-bottom: 12px;
+                border-radius: 8px;
+                background-color: #f9f9f9;
+                width: 100%;
             }
+
+
+            .tweets-wrapper {
+                max-width: 768px;
+                margin: 40px auto;
+                padding: 0 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            #tweets {
+                width: 100%;
+                text-align: left;
+            }
+
         </style>
 
 </head>
 
 <body>
-    <div class="container">
-        <div class="image">
-            <img style="border-radius: 50%;width: 100%;"
-                src="https://raw.githubusercontent.com/jarry90/jarry90.github.io/refs/heads/main/img/me.jpg" alt="Your Image">
-        </div>
-        <div class="content">
-            <h1>Hi there 👋 I'm Jared</h1>
-            <code>🦖 DAD, HUSBAND & DREAMER 🎃</code>
-            <p>GradCertIT 2023 & BEng 2014</p>
-            <!-- <p>🎵 Listening to: <span id="artist">Loading...</span></p> -->
-            <p>🤷 I like riding bikes and watching sport.</p>
-            <p>♟️ Lets play <a href="https://www.chess.com/member/jarry90">chess</a>. Rating: <span id="rating">Loading...</span></p>
-            <p>Find me: <a href="https://github.com/jarry90">GitHub</a> ⢷ <a href="mailto:hi@jarry.dev">Email</a>
-            ⢷ <a
-                href="https://www.linkedin.com/in/jaredcavalli/">Linkedin</a></p>
-            <p>Working on: <a href="https://goodtraveldays.com/">Good Travel Days</a> ⢷ <a href="https://goodsnowdays.com/">Good Snow Days</a></p>
+    <div class="wrapper">
+        <div class="container">
+            <div class="image">
+                <img style="border-radius: 50%;width: 100%;"
+                    src="https://raw.githubusercontent.com/jarry90/jarry90.github.io/refs/heads/main/img/me.jpg" alt="Your Image">
+            </div>
+            <div class="content">
+                <h1>Hi there 👋 I'm Jared</h1>
+                <code>🦖 DAD, HUSBAND & DREAMER 🎃</code>
+                <p>GradCertIT 2023 & BEng 2014</p>
+                <!-- <p>🎵 Listening to: <span id="artist">Loading...</span></p> -->
+                <p>🤷 I like riding bikes and watching sport.</p>
+                <p>♟️ Lets play <a href="https://www.chess.com/member/jarry90">chess</a>. Rating: <span id="rating">Loading...</span></p>
+                <p>Find me: <a href="https://github.com/jarry90">GitHub</a> ⢷ <a href="mailto:hi@jarry.dev">Email</a>
+                ⢷ <a
+                    href="https://www.linkedin.com/in/jaredcavalli/">Linkedin</a></p>
+                <p>Working on: <a href="https://goodtraveldays.com/">Good Travel Days</a> ⢷ <a href="https://goodsnowdays.com/">Good Snow Days</a></p>
 
+            </div>
+        </div>
+
+        <div class="tweets-wrapper">
+            <h2>&#8595; &#8595; &#8595; &#8595;</h2>
+            <div id="tweets"></div>
         </div>
     </div>
-
-    <div id="tweets"></div>
     
     <script>
         fetch('data/tweets.json')
