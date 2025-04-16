@@ -26,27 +26,44 @@ jobs:
         TWITTER_USERNAME: ${{ secrets.TWITTER_USERNAME }}
       run: |
         python3 <<EOF
-        import requests, json, os
+        import os
+        import requests
+        import json
 
         headers = {
             "Authorization": f"Bearer {os.environ['BEARER_TOKEN']}"
         }
 
+        print("🔍 Getting user ID...")
         user_resp = requests.get(
             f"https://api.twitter.com/2/users/by/username/{os.environ['TWITTER_USERNAME']}",
             headers=headers
         )
+        print("User response status:", user_resp.status_code)
+        print("User response body:", user_resp.text)
+
+        user_resp.raise_for_status()
         user_id = user_resp.json()["data"]["id"]
+
+        print("✅ User ID found:", user_id)
+        print("📥 Getting tweets...")
 
         tweet_resp = requests.get(
             f"https://api.twitter.com/2/users/{user_id}/tweets?max_results=5&tweet.fields=created_at,text",
             headers=headers
         )
-        tweets = tweet_resp.json()["data"]
+        print("Tweet response status:", tweet_resp.status_code)
+        print("Tweet response body:", tweet_resp.text)
 
+        tweet_resp.raise_for_status()
+        tweets = tweet_resp.json().get("data", [])
+
+        os.makedirs("data", exist_ok=True)
         with open("data/tweets.json", "w") as f:
             json.dump(tweets, f, indent=2)
+        print("✅ Tweets saved to data/tweets.json")
         EOF
+
 
     - name: Commit and Push
       run: |
