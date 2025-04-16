@@ -130,11 +130,38 @@
         </div>
     </div>
 
+    <div id="tweets"></div>
+
+    <script>
+    fetch('data/tweets.json')
+        .then(res => res.json())
+        .then(tweets => {
+        const container = document.getElementById('tweets');
+        tweets.forEach(tweet => {
+            const div = document.createElement('div');
+            div.className = 'tweet';
+            div.innerHTML = `
+            <p>${tweet.text}</p>
+            <small>${new Date(tweet.created_at).toLocaleString()}</small>
+            `;
+            container.appendChild(div);
+        });
+        });
+    </script>
+
+    <style>
+    .tweet {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        font-family: sans-serif;
+    }
+    </style>
+
+
     <!-- <div class="row mt-4"> -->
         <!-- <p></p> -->
 
         <!-- <p></p> -->
-
     <!-- </div> -->
 
     <script src="script.js"></script>
