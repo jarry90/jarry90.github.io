@@ -49,7 +49,7 @@ jobs:
         print("📥 Getting tweets...")
 
         tweet_resp = requests.get(
-            f"https://api.twitter.com/2/users/{user_id}/tweets?max_results=5&tweet.fields=created_at,text",
+            f"https://api.twitter.com/2/users/{user_id}/tweets?max_results=4&tweet.fields=created_at,text",
             headers=headers
         )
         print("Tweet response status:", tweet_resp.status_code)
