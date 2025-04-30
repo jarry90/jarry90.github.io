@@ -13,6 +13,62 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('img/me/me.json')
+        .then(res => res.json())
+        .then(files => {
+            const imgEl = document.querySelector('.image img');
+            const randomFile = files[Math.floor(Math.random() * files.length)];
+            imgEl.src = `img/me/${randomFile}`;
+
+            // Setup gallery click
+            imgEl.addEventListener('click', () => {
+                const galleryHtml = files.map(file => `
+                    <img src="img/me/${file}" style="max-width: 90%; margin: 10px; border-radius: 8px;" />
+                `).join('');
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100vw';
+                overlay.style.height = '100vh';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                overlay.style.display = 'flex';
+                overlay.style.flexWrap = 'wrap';
+                overlay.style.justifyContent = 'center';
+                overlay.style.alignItems = 'center';
+                overlay.style.overflowY = 'auto';
+                overlay.style.zIndex = '9999';
+                overlay.innerHTML = galleryHtml;
+                overlay.addEventListener('click', () => document.body.removeChild(overlay));
+                document.body.appendChild(overlay);
+            });
+        })
+        .catch(err => console.error('Failed to load image list:', err));
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const dot = document.createElement('div');
+    dot.classList.add('cursor-dot');
+    document.body.appendChild(dot);
+
+    let mouseX = 0, mouseY = 0;
+    let currentX = 0, currentY = 0;
+
+    document.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animate() {
+        currentX += (mouseX - currentX) * 0.15;
+        currentY += (mouseY - currentY) * 0.15;
+        dot.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+});
 
 
 

@@ -33,6 +33,11 @@
         rel="stylesheet">
 
         <style>
+            :root {
+                --theme-purple: rgba(128, 0, 128, 0.6);
+                --theme-purple-soft: rgba(128, 0, 128, 0.25);
+            }
+            
             body {
                 background-color: #fff;
                 font-family: 'Roboto Mono', monospace;
@@ -87,6 +92,13 @@
             img {
                 border-radius: 50%;
                 width: 100%;
+                transition: all 0.3s ease;
+            }
+
+            .image img:hover {
+                box-shadow: 0 0 12px var(--theme-purple);
+                transform: scale(1.03);
+                cursor: pointer;
             }
     
             code {
@@ -137,6 +149,21 @@
                 text-align: left;
             }
 
+            .cursor-dot {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 15px;
+                height: 15px;
+                background-color: var(--theme-purple-soft);
+                border-radius: 50%;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                transition: transform 0.08s ease-out;
+                z-index: 9999;
+                backdrop-filter: blur(2px);
+            }
+
         </style>
 
 </head>
@@ -145,8 +172,7 @@
     <div class="wrapper">
         <div class="container">
             <div class="image">
-                <img style="border-radius: 50%;width: 100%;"
-                    src="https://raw.githubusercontent.com/jarry90/jarry90.github.io/refs/heads/main/img/me.jpg" alt="Your Image">
+                <img style="border-radius: 50%;width: 100%;" src="img/me/Germany.jpg" alt="Profile">
             </div>
             <div class="content">
                 <h1>Hi there 👋 I'm Jared</h1>
