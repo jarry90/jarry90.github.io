@@ -31,140 +31,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&family=Roboto:ital,wght@0,700;1,500&display=swap"
         rel="stylesheet">
-
-        <style>
-            :root {
-                --theme-purple: rgba(128, 0, 128, 0.6);
-                --theme-purple-soft: rgba(128, 0, 128, 0.25);
-            }
-            
-            body {
-                background-color: #fff;
-                font-family: 'Roboto Mono', monospace;
-                margin: 0;
-                min-height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .wrapper {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-    
-            h1 {
-                font-family: 'Roboto', sans-serif;
-                font-weight: bold;
-            }
-    
-            h2, h3, h4, h5, h6 {
-                font-family: 'Roboto', sans-serif;
-                font-style: italic;
-            }
-    
-            a {
-                text-decoration: none;
-                color: rgb(230, 150, 0);
-            }
-    
-            .container {
-                display: flex;
-                flex-direction: row;
-                max-width: 768px;
-                margin: auto;
-                background-color: #fff;
-                /* box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21); */
-            }
-    
-            .image {
-                flex: 1;
-                padding: 20px;
-            }
-    
-            .content {
-                flex: 2;
-                padding: 20px;
-            }
-    
-            img {
-                border-radius: 50%;
-                width: 100%;
-                transition: all 0.3s ease;
-            }
-
-            .image img:hover {
-                box-shadow: 0 0 12px var(--theme-purple);
-                transform: scale(1.03);
-                cursor: pointer;
-            }
-    
-            code {
-                display: flex;
-                color: black;
-                padding: 0.2em 0.4em;
-                margin: 10px 0;
-                background-color: rgba(175, 184, 193, 0.2);
-                border-radius: 6px;
-            }
-    
-            @media (max-width: 768px) {
-                .container {
-                    flex-direction: column;
-                }
-    
-                .image {
-                    order: 1;
-                }
-    
-                .content {
-                    order: 2;
-                }
-            }
-
-            .tweet {
-                padding: 12px;
-                border: 1px solid #eee;
-                margin-bottom: 12px;
-                border-radius: 8px;
-                background-color: #f9f9f9;
-                width: 100%;
-            }
-
-
-            .tweets-wrapper {
-                max-width: 768px;
-                margin: 40px auto;
-                padding: 0 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            #tweets {
-                width: 100%;
-                text-align: left;
-            }
-
-            .cursor-dot {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 15px;
-                height: 15px;
-                background-color: var(--theme-purple-soft);
-                border-radius: 50%;
-                pointer-events: none;
-                transform: translate(-50%, -50%);
-                transition: transform 0.08s ease-out;
-                z-index: 9999;
-                backdrop-filter: blur(2px);
-            }
-
-        </style>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -172,7 +39,7 @@
     <div class="wrapper">
         <div class="container">
             <div class="image">
-                <img style="border-radius: 50%;width: 100%;" src="img/me/Germany.jpg" alt="Profile">
+                <div id="profile-image"></div>
             </div>
             <div class="content">
                 <h1>Hi there 👋 I'm Jared</h1>
@@ -184,7 +51,7 @@
                 <p>Find me: <a href="https://github.com/jarry90">GitHub</a> ⢷ <a href="mailto:hi@jarry.dev">Email</a>
                 ⢷ <a
                     href="https://www.linkedin.com/in/jaredcavalli/">Linkedin</a></p>
-                <p>Working on: <a href="https://goodtraveldays.com/">Good Travel Days</a> ⢷ <a href="https://goodsnowdays.com/">Good Snow Days</a></p>
+                <p>Working on: <a href="https:/theHLZone.com/">The Highlight Zone</a> ⢷ <a href="https://goodtraveldays.com/">Good Travel Days</a> ⢷ <a href="https://goodsnowdays.com/">Good Snow Days</a></p>
 
             </div>
         </div>

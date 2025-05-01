@@ -1,0 +1,46 @@
+name: Generate me.json
+
+on:
+  push:
+    paths:
+      - 'img/me/**'
+      - '.github/workflows/generate-me-json.yml'
+  workflow_dispatch:
+
+jobs:
+  generate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Generate me.json
+        run: |
+          IMAGE_DIR="img/me"
+          OUTPUT_FILE="$IMAGE_DIR/me.json"
+
+          echo "[" > "$OUTPUT_FILE"
+
+          FIRST=true
+          for FILE in "$IMAGE_DIR"/*.{jpg,jpeg,png,webp,gif,JPG,JPEG,PNG,WEBP,GIF}; do
+            [ -e "$FILE" ] || continue  # skip if no matching files
+            FILENAME=$(basename "$FILE")
+            if [ "$FIRST" = true ]; then
+              FIRST=false
+            else
+              echo "," >> "$OUTPUT_FILE"
+            fi
+            echo "  \"$FILENAME\"" >> "$OUTPUT_FILE"
+          done
+
+          echo "]" >> "$OUTPUT_FILE"
+          echo "me.json generated: $OUTPUT_FILE"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add img/me/me.json
+          git diff --cached --quiet || git commit -m "Auto-generate me.json"
+          git push

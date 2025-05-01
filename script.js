@@ -47,28 +47,39 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(err => console.error('Failed to load image list:', err));
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const dot = document.createElement('div');
-    dot.classList.add('cursor-dot');
-    document.body.appendChild(dot);
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('img/me/me.json')
+        .then(res => res.json())
+        .then(files => {
+            const randomFile = files[Math.floor(Math.random() * files.length)];
+            const imagePath = `img/me/${randomFile}`;
 
-    let mouseX = 0, mouseY = 0;
-    let currentX = 0, currentY = 0;
+            const img = new Image();
+            img.src = imagePath;
+            img.alt = 'Profile';
 
-    document.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
+            img.onload = () => {
+                document.getElementById('profile-image').appendChild(img);
 
-    function animate() {
-        currentX += (mouseX - currentX) * 0.15;
-        currentY += (mouseY - currentY) * 0.15;
-        dot.style.transform = `translate(${currentX}px, ${currentY}px)`;
-        requestAnimationFrame(animate);
-    }
-
-    animate();
+                // Gallery click
+                img.addEventListener('click', () => {
+                    const galleryHtml = files.map(file => `
+                        <img src="img/me/${file}" style="max-width: 90%; margin: 10px; border-radius: 8px;" />
+                    `).join('');
+                    const overlay = document.createElement('div');
+                    overlay.style = `
+                        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                        background: rgba(0,0,0,0.9); display: flex; flex-wrap: wrap;
+                        justify-content: center; align-items: center; overflow-y: auto; z-index: 9999;
+                    `;
+                    overlay.innerHTML = galleryHtml;
+                    overlay.addEventListener('click', () => overlay.remove());
+                    document.body.appendChild(overlay);
+                });
+            };
+        });
 });
+
 
 
 
